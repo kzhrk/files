@@ -2,6 +2,8 @@
   "name": "files",
   "version": "1.0.0",
   "scripts": {
+    "webpack": "webpack -w",
+    "eslint": "eslint --fix ./src/webpack/js; exit 0"
   },
   "author": "kzhrk",
   "license": "MIT",
@@ -9,6 +11,10 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-es2015": "^6.24.1",
+    "eslint": "^4.18.1",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-prettier": "^2.6.0",
+    "prettier": "^1.11.0",
     "webpack": "^3.6.0"
   }
 }
