@@ -1,14 +1,16 @@
 import webpack from 'webpack';
 import path from 'path';
+import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
+
 
 export default {
 	entry: {
-		main: './resource/webpack/js/main.js'
+		main: './src/webpack/main.js'
 	},
 
 	output: {
 		path: path.resolve(__dirname, './public/js'),
-		filename: '[name].js'
+		filename: '[name].bundle.js'
 	},
 
 	resolve: {
@@ -18,7 +20,7 @@ export default {
 	module: {
 		rules: [
 			{
-				test: /\.js?$/,
+				test: /\.js$/,
 				use: [{
 					loader: "babel-loader"
 				}]
@@ -27,11 +29,6 @@ export default {
 	},
 
 	plugins: [
-		new webpack.DefinePlugin({
-			'process.env': {
-				NODE_ENV: JSON.stringify('production')
-			}
-		}),
-		new webpack.optimize.UglifyJsPlugin()
+		new UglifyJsPlugin()
 	]
 }
