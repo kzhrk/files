@@ -3,6 +3,7 @@ node_modules
 Thumbs.db
 .idea
 config.js
+package-lock.json
 public
 
 npm-debug*
