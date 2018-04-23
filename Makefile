@@ -12,22 +12,29 @@ help:
 
 .PHONY: install
 install:
-	# install webpack
-	@npm i -D webpack webpack-cli
-	# install babel
-	@npm i -D babel-core babel-loader babel-preset-env babel-plugin-transform-async-to-generator babel-plugin-transform-object-rest-spread babel-plugin-transform-runtime
-	# install pug
+	# webpack
+	@npm i -D webpack webpack-cli webpack-dev-server
+	# babel
+	@npm i -D babel-core babel-loader babel-preset-env
+	# pug
 	@npm i -D pug-cli
-	# install eslint & prettier
+	# eslint & prettier
 	@npm i -D eslint eslint-config-prettier eslint-plugin-prettier prettier
-	# install css preprocessor
-	@npm i -D node-sass postcss-cli cssnano autoprefixer
-	# install watch
+	# css preprocessor
+	@npm i -D postcss-cli cssnano autoprefixer
+	# watch
+	@npm i -D watch
+	# git hooks
+	@npm i -D git-hooks
+	@mkdir -p .githooks/pre-commit
+	@echo '#!/bin/bash' "\nmake eslint" > .githooks/pre-commit/eslint
+	@chmod +x .githooks/pre-commit/eslint
+	# watch
 	@npm i -D watch
 
 .PHONY: start
 start:
-	@make webpack & make pug & make sass & make postcss & make server
+	@make webpack & make pug & make postcss & make watch & make server
 
 .PHONY: webpack
 webpack:
@@ -45,18 +52,18 @@ else
 	@npx pug ${SRC}/pug -wo ${PUBLIC}
 endif
 
-.PHONY: sass
-sass:
-	@npx node-sass ${SRC}/scss -o ${TEMP}/css && npx node-sass ${SRC}/scss -wo ${TEMP}/css
+.PHONY: watch
+watch:
+	@npx watch "make postcss" ${SRC}/css --interval=15
 
 .PHONY: postcss
 postcss:
-	@npx postcss ${TEMP}/**/*.css -c ./postcss.config.js --no-map -b ${TEMP}/css -x css -d ${PUBLIC}/css -w
+	@npx postcss ${SRC}/css/*.css -c ./postcss.config.js --no-map -b ${SRC}/css -x css -d ${PUBLIC}/css
 
 .PHONY: server
 server:
-	@npx browser-sync start --server ${PUBLIC}
+	@webpack-dev-server
 
 .PHONY: eslint
 eslint:
-	@npx eslint --fix --ext .js ${SRC}/webpack
+	@npx eslint --fix --ext .js ${SRC}/webpack ./webpack.config.babel.js
