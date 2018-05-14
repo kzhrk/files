@@ -36,12 +36,16 @@ install:
 start:
 	@make webpack & make pug & make postcss & make watch & make server
 
+.PHONY: dev
+dev:
+	@make webpack env=development
+
 .PHONY: webpack
 webpack:
 ifeq ($(env), $(DEVELOPMENT))
-	@npx webpack -w --mode development
+	@NODE_ENV=development npx webpack-dev-server --mode development
 else
-	@npx webpack -w --mode production
+	@NODE_ENV=production npx webpack-dev-server --progress --hide-modules --mode production
 endif
 
 .PHONY: pug
@@ -62,7 +66,7 @@ postcss:
 
 .PHONY: server
 server:
-	@webpack-dev-server
+	@npx webpack-dev-server
 
 .PHONY: eslint
 eslint:
