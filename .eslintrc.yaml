@@ -3,7 +3,6 @@ env:
   browser: true
   node: true
   es6: true
-  jquery: true
 extends:
 - eslint:recommended
 - plugin:prettier/recommended
@@ -17,5 +16,3 @@ rules:
   - error
   - singleQuote: true
     bracketSpacing: true
-globals:
-  PIXI: true

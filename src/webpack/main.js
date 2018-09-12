@@ -1,6 +1,6 @@
-export default class Main {
+class Main {
   constructor() {
-    console.log('hoge');
+    console.log('hoge11');
   }
 }
 
