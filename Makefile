@@ -1,7 +1,7 @@
 .PHONY: install
 install:
 	# webpack
-	@npm i -D webpack webpack-cli webpack-serve uglifyjs-webpack-plugin babel-loader
+	@npm i -D webpack webpack-cli webpack-dev-server uglifyjs-webpack-plugin babel-loader
 	# babel
 	@npm i -D @babel/core @babel/plugin-syntax-object-rest-spread @babel/preset-env
 	# pug

@@ -1,12 +1,12 @@
 {
   "private": true,
   "scripts": {
-    "start": "NODE_ENV=development npm run postcss:dev & npm run webpack:dev",
-    "build": "NODE_ENV=production npm run postcss:pro & npm run webpack:pro",
-    "postcss:dev": "postcss ./src/css/*.css -c ./postcss.config.js --map ./public/css/style.css.map -w -b ./src/css -x css -d ./public/css",
-    "postcss:pro": "postcss ./src/css/*.css -c ./postcss.config.js --no-map -b ./src/css -x css -d ./public/css",
-    "webpack:dev": "webpack -w & webpack-serve",
-    "webpack:pro": "webpack --display-used-exports",
+    "start": "npm run postcss:dev & npm run webpack:dev",
+    "build": "npm run postcss:pro & npm run webpack:pro",
+    "postcss:dev": "NODE_ENV=development postcss ./src/css/*.css -c ./postcss.config.js --map ./public/css/style.css.map -w -b ./src/css -x css -d ./public/css",
+    "postcss:pro": "NODE_ENV=production postcss ./src/css/*.css -c ./postcss.config.js --no-map -b ./src/css -x css -d ./public/css",
+    "webpack:dev": "NODE_ENV=development webpack -w & webpack-dev-server",
+    "webpack:pro": "NODE_ENV=production webpack --display-used-exports",
     "test": "NODE_ENV=test mocha --compilers js:@babel/register --recursive $(find test -name '*.spec.js')",
     "eslint": "eslint --fix --ext .js ./src webpack.config.js"
   },
@@ -28,6 +28,6 @@
     "watch": "^1.0.2",
     "webpack": "^4.18.0",
     "webpack-cli": "^3.1.0",
-    "webpack-serve": "^2.0.2"
+    "webpack-dev-server": "^3.1.9"
   }
 }

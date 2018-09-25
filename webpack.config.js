@@ -43,8 +43,8 @@ module.exports = {
       : []
   },
 
-  serve: {
-    content: path.join(__dirname, 'public'),
+  devServer: {
+    contentBase: path.join(__dirname, 'public'),
     port: 3000
   },
 
