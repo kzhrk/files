@@ -1,6 +1,10 @@
 class Main {
   constructor() {
-    console.log('hoge11');
+    this.sample = 'sample';
+  }
+
+  get string() {
+    return this.sample;
   }
 }
 
